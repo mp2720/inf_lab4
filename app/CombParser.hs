@@ -1,8 +1,8 @@
 module CombParser where
 
-data Terms term = Terms {rems :: [term], lineno :: Int} deriving (Show)
+type Terms term = [term]
 
-data ParserResult term v = Ok v (Terms term) | Error Int deriving (Show)
+data ParserResult term v = Ok v (Terms term) | Error deriving (Show)
 
 type Parser term v = Terms term -> ParserResult term v
 
@@ -13,30 +13,30 @@ type Interpr a b = a -> b
   where
     pa (Ok ra ts') = case b ts' of
       Ok rb ts'' -> Ok (ra, rb) ts''
-      Error e -> Error e
-    pa (Error e) = Error e
+      Error -> Error
+    pa Error = Error
 
 (<|>) :: Parser t v -> Parser t v -> Parser t v
 (<|>) a b ts = pa (a ts)
   where
-    pa (Error _) = b ts
+    pa Error = b ts
     pa ra = ra
 
 (<=>) :: Parser t v -> Interpr v i -> Parser t i
 (<=>) p int ts = case p ts of
   Ok r ts' -> Ok (int r) ts'
-  Error e -> Error e
+  Error -> Error
 
 (<=>>) :: Parser t (v1, v2) -> Interpr v1 (v2 -> i) -> Parser t i
 (<=>>) p int = p <=> uncurry int
 
 termIf :: (t -> Bool) -> Parser t t
-termIf _ (Terms {rems = [], lineno = l}) = Error l
-termIf f (Terms {rems = (x : xs), lineno = l}) =
+termIf _ [] = Error
+termIf f (x : xs) =
   if f x
     then
-      Ok x (Terms {rems = xs, lineno = l})
-    else Error l
+      Ok x xs
+    else Error
 
 termEq :: (Eq t) => t -> Parser t t
 termEq c = termIf (c ==)
@@ -56,8 +56,8 @@ optional :: Parser t v -> v -> Parser t v
 optional p e = p <|> empty e
 
 end :: Parser t ()
-end Terms {rems = [], lineno = l} = Ok () (Terms {rems = [], lineno = l})
-end Terms {lineno = l} = Error l
+end [] = Ok () []
+end _ = Error
 
 enclosed :: (Eq t) => t -> t -> Parser t v -> Parser t v
 enclosed l r p =

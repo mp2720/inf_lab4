@@ -1,8 +1,7 @@
-module JsonParser (Json (..), parseJsonFromString) where
+module JsonParser (Json (..), parseJson) where
 
 import CombParser
 import Data.Char (chr, ord)
-import Text.Printf (printf)
 
 data Json
   = JsonNumber Float
@@ -99,8 +98,8 @@ jsonWhitespace =
   (spaceChar <**> jsonWhitespace <=> const ()) <|> empty ()
   where
     spaceChar = termEq ' ' <|> termEq '\r' <|> termEq '\t' <|> newline <=> const ()
-    newline Terms {rems = ('\n' : xs), lineno = l} = Ok '\n' Terms {rems = xs, lineno = l + 1}
-    newline Terms {lineno = l} = Error l
+    newline ('\n' : ts) = Ok '\n' ts
+    newline _ = Error
 
 commaSeparated :: Parser Char v -> Parser Char [v]
 commaSeparated item =
@@ -136,7 +135,7 @@ value = jsonWhitespace <**> content <**> jsonWhitespace <=> \(_, (v, _)) -> v
 json :: JsonParser
 json = value <**> end <=> fst
 
-parseJsonFromString :: String -> Either String Json
-parseJsonFromString str = case json $ Terms {rems = str, lineno = 1} of
+parseJson :: String -> Either String Json
+parseJson s = case json s of
+  Error -> Left "JSON syntax error"
   Ok v _ -> Right v
-  Error l -> Left $ printf "syntax error at line %d" l
