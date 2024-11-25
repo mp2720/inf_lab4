@@ -1,0 +1,80 @@
+{
+    "days": [
+        {
+            "dayOfTheWeek": "Вторник",
+            "classes": [
+                {
+                    "type": "lecture",
+                    "startTime": "11:40",
+                    "endTime": "13:10",
+                    "subject": "Линейная алгебра",
+                    "teacher": "Тушавин Глеб Владимирович",
+                    "auditorium": {
+                        "address": "ул. Ломоносова, д.9, лит.Б",
+                        "number": 2202
+                    }
+                },
+                {
+                    "type": "practice",
+                    "startTime": "13:30",
+                    "endTime": "15:00",
+                    "subject": "Линейная алгебра",
+                    "teacher": "Свинцов Михаил Викторович",
+                    "auditorium": {
+                        "address": "ул. Ломоносова, д.9, лит.Б",
+                        "number": 4306
+                    }
+                },
+                {
+                    "type": "lecture",
+                    "startTime": "17:00",
+                    "endTime": "18:30",
+                    "subject": "Основы дискретной математики (продвинутый уровень)",
+                    "teacher": "Карпов Дмитрий Валерьевич",
+                    "auditorium": {
+                        "address": "Кронверкский пр., д.49, лит.А",
+                        "number": 1404
+                    }
+                },
+                {
+                    "type": "practice",
+                    "startTime": "18:40",
+                    "endTime": "20:10",
+                    "subject": "Основы дискретной математики (продвинутый уровень)",
+                    "teacher": "Карпов Дмитрий Валерьевич",
+                    "auditorium": {
+                        "address": "Кронверкский пр., д.49, лит.А",
+                        "number": 1404
+                    }
+                }
+            ]
+        },
+        {
+            "dayOfTheWeek": "Пятница",
+            "classes": [
+                {
+                    "type": "lecture",
+                    "startTime": "10:00",
+                    "endTime": "11:30",
+                    "subject": "Математический анализ",
+                    "teacher": "Правдин Константин Владимирович",
+                    "auditorium": {
+                        "address": "Кронверкский пр., д.49, лит.А",
+                        "number": 2407
+                    }
+                },
+                {
+                    "type": "lecture",
+                    "startTime": "11:40",
+                    "endTime": "13:10",
+                    "subject": "Математический анализ",
+                    "teacher": "Савченко Татьяна Владимировна",
+                    "auditorium": {
+                        "address": "Кронверкский пр., д.49, лит.А",
+                        "number": 2414
+                    }
+                }
+            ]
+        }
+    ]
+}
