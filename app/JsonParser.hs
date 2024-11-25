@@ -97,9 +97,7 @@ jsonWhitespace :: Parser Char ()
 jsonWhitespace =
   (spaceChar <**> jsonWhitespace <=> const ()) <|> empty ()
   where
-    spaceChar = termEq ' ' <|> termEq '\r' <|> termEq '\t' <|> newline <=> const ()
-    newline ('\n' : ts) = Ok '\n' ts
-    newline _ = Error
+    spaceChar = termEq ' ' <|> termEq '\r' <|> termEq '\t' <|> termEq '\n' <=> const ()
 
 commaSeparated :: Parser Char v -> Parser Char [v]
 commaSeparated item =
