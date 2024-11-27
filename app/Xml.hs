@@ -1,4 +1,4 @@
-module Xml (XmlElement (..), XmlChild (..), xmlElement) where
+module Xml (XmlElement (..), XmlChild (..), xmlElement, xmlAttrsElement) where
 
 import Text.Printf (printf)
 
@@ -10,8 +10,11 @@ data XmlElement = XmlElement
     body :: [XmlChild]
   }
 
-xmlElement :: String -> [(String, String)] -> [XmlChild] -> XmlElement
-xmlElement tag' attrs' body' = XmlElement {tag = tag', attrs = attrs', body = body'}
+xmlElement :: String -> [XmlChild] -> XmlElement
+xmlElement tag' body' = XmlElement {tag = tag', attrs = [], body = body'}
+
+xmlAttrsElement :: String -> [(String, String)] -> [XmlChild] -> XmlElement
+xmlAttrsElement tag' attrs' body' = XmlElement {tag = tag', attrs = attrs', body = body'}
 
 escape :: String -> String
 escape ('&' : xs) = "&amp;" ++ escape xs

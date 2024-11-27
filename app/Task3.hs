@@ -4,7 +4,7 @@ import JsonParser
 import Xml
 
 jsonToXml :: String -> Json -> XmlElement
-jsonToXml rootElementTagName json = xmlElement rootElementTagName [] $ jsonToXml' json
+jsonToXml rootElementTagName json = xmlElement rootElementTagName $ jsonToXml' json
 
 jsonToXml' :: Json -> [XmlChild]
 jsonToXml' (JsonNumber n) = [XmlText showNumber]
@@ -22,7 +22,7 @@ jsonToXml' (JsonArray arr) = arrToXml "item" arr
 jsonToXml' (JsonObject fields) = concatMap convertField fields
   where
     convertField (k, JsonArray arr) = arrToXml k arr
-    convertField (k, v) = [XmlNode $ xmlElement k [] $ jsonToXml' v]
+    convertField (k, v) = [XmlNode $ xmlElement k $ jsonToXml' v]
 
 arrToXml :: String -> [Json] -> [XmlChild]
-arrToXml itemTag = map (XmlNode . xmlElement itemTag [] . jsonToXml')
+arrToXml itemTag = map (XmlNode . xmlElement itemTag . jsonToXml')
