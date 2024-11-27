@@ -1,10 +1,12 @@
-module JsonParser (Json (..), parseJson) where
+module JsonParser (Json (..), parseJson, jsonToInteger, jsonIsInteger) where
 
 import CombParser
 import Data.Char (chr, ord)
 
+type JsonNumberType = Float
+
 data Json
-  = JsonNumber Float
+  = JsonNumber JsonNumberType
   | JsonString String
   | JsonBool Bool
   | JsonNull
@@ -137,3 +139,12 @@ parseJson :: String -> Either String Json
 parseJson s = case json s of
   Error -> Left "JSON syntax error"
   Ok v _ -> Right v
+
+jsonIsInteger :: JsonNumberType -> Bool
+jsonIsInteger n = n - floored == 0
+  where
+    floored :: Float
+    floored = fromIntegral (floor n :: Int)
+
+jsonToInteger :: JsonNumberType -> Maybe Int
+jsonToInteger n = if jsonIsInteger n then Just $ floor n else Nothing
