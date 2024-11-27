@@ -1,10 +1,10 @@
 {
     "days": [
         {
-            "dayOfTheWeek": "Вторник",
+            "ofTheWeek": "Вторник",
             "classes": [
                 {
-                    "type": "lecture",
+                    "form": "lecture",
                     "startTime": "11:40",
                     "endTime": "13:10",
                     "subject": "Линейная алгебра",
@@ -15,7 +15,7 @@
                     }
                 },
                 {
-                    "type": "practice",
+                    "form": "practice",
                     "startTime": "13:30",
                     "endTime": "15:00",
                     "subject": "Линейная алгебра",
@@ -26,7 +26,7 @@
                     }
                 },
                 {
-                    "type": "lecture",
+                    "form": "lecture",
                     "startTime": "17:00",
                     "endTime": "18:30",
                     "subject": "Основы дискретной математики (продвинутый уровень)",
@@ -37,7 +37,7 @@
                     }
                 },
                 {
-                    "type": "practice",
+                    "form": "practice",
                     "startTime": "18:40",
                     "endTime": "20:10",
                     "subject": "Основы дискретной математики (продвинутый уровень)",
@@ -50,10 +50,10 @@
             ]
         },
         {
-            "dayOfTheWeek": "Пятница",
+            "ofTheWeek": "Пятница",
             "classes": [
                 {
-                    "type": "lecture",
+                    "form": "lecture",
                     "startTime": "10:00",
                     "endTime": "11:30",
                     "subject": "Математический анализ",
@@ -64,7 +64,7 @@
                     }
                 },
                 {
-                    "type": "lecture",
+                    "form": "lecture",
                     "startTime": "11:40",
                     "endTime": "13:10",
                     "subject": "Математический анализ",

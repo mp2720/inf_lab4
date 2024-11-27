@@ -60,10 +60,8 @@ jsonField _ _ _ = Nothing
 type JsonSchema' a b = (Json, a -> b) -> Maybe (Json, b)
 
 (<**>) ::  ((Json, b) -> Maybe a) -> (a -> Maybe (Json, c)) -> (Json, b) -> Maybe (Json, c)
--- (<**>) :: JsonSchema' a (b -> c) -> JsonSchema' b c -> (Json, a -> b -> c) -> Maybe (Json, c)
 (<**>) r l (json, f) = r (json, f) >>= l
 
--- (<=>) :: ((Json, i) -> Maybe (Json, r)) -> i -> Json -> Maybe r
 (<=>) :: ((a1, b) -> Maybe (a, b1)) -> b -> a1 -> Maybe b1
 (<=>) schema int json = snd <$> schema (json, int)
 

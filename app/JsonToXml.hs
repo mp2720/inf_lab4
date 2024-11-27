@@ -1,7 +1,9 @@
-module Task3 (jsonToXml) where
+module JsonToXml where
 
 import JsonParser
 import Xml
+
+-- (почти) универсальный JSON -> XML
 
 jsonToXml :: String -> Json -> XmlElement
 jsonToXml rootElementTagName json = xmlElement rootElementTagName $ jsonToXml' json
